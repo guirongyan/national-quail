@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Missouri S&T QuAIL – People</title>
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#050a14;--bg2:#080e1c;--surface:#0c1526;--surface2:#111d30;--border:rgba(0,180,255,0.12);--accent:#00b4ff;--accent2:#7b2fff;--accent3:#00ffc3;--text:#f1f4fa;--text-muted:#ccd7e7;--gold:#f0c040;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--bg);color:var(--text);font-family:'Google Sans Flex',sans-serif;font-weight:200;font-size:1.125rem;line-height:1.7;overflow-x:hidden;}
+    h1,h2,h3,h4,h5,h6{font-family:'Google Sans Flex',sans-serif;font-weight:500;}
+    b,strong{font-weight:500;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,10,20,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:64px;}
+    .nav-brand{display:flex;align-items:center;gap:0.75rem;text-decoration:none;}
+    .nav-logo{flex-shrink:0;height:40px;display:flex;align-items:center;justify-content:center;}
+    .nav-logo img{height:100%;width:auto;max-width:120px;display:block;object-fit:contain;}
+    .nav-brand-text{font-family:'Google Sans Flex',sans-serif;font-weight:500;font-size:1.1rem;color:var(--text);letter-spacing:0.04em;}
+    .nav-brand-text span{color:var(--accent);}
+    .nav-links{display:flex;gap:0.15rem;list-style:none;}
+    .nav-links a{display:block;padding:0.4rem 0.85rem;font-family:'Google Sans Flex',sans-serif;font-weight:500;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;border-radius:4px;transition:color 0.2s,background 0.2s;}
+    .nav-links a:hover{color:var(--accent);background:rgba(0,180,255,0.08);}
+    .nav-links a.active{color:var(--accent);background:rgba(0,180,255,0.1);border-bottom:2px solid var(--accent);}
+    .page-content{padding-top:64px;}
+    .page-hero{background:var(--bg2);padding:3.5rem 2.5rem 3rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden;text-align:center;display:flex;flex-direction:row;align-items:center;justify-content:center;}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(123,47,255,0.08) 0%,transparent 60%);pointer-events:none;}
+    .page-hero h1{font-size:2.8rem;letter-spacing:0.04em;color:var(--text);}
+    .section{padding:4rem 0;}
+    .container{max-width:1100px;margin:0 auto;padding:0 2.5rem;}
+    .section-label{font-family:'Google Sans Flex',sans-serif;font-weight:500;font-size:1rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;}
+    h2.group-title{font-size:1rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);border-bottom:1px solid var(--border);padding-bottom:0.6rem;margin-bottom:1.5rem;margin-top:2.5rem;}
+
+    /* Profile cards (director + grid members) */
+    .profile-card{display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;position:relative;overflow:hidden;transition:border-color 0.25s;}
+    .profile-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--accent),var(--accent2));pointer-events:none;}
+    .profile-card:hover{border-color:rgba(0,180,255,0.3);}
+    .profile-card--director{margin-bottom:3rem;}
+    .profile-photo{width:130px;height:130px;border-radius:50%;border:3px solid var(--accent);flex-shrink:0;background:linear-gradient(135deg,var(--surface2),var(--surface));display:flex;align-items:center;justify-content:center;font-family:'Google Sans Flex',sans-serif;font-size:1.05rem;font-weight:500;color:var(--accent);overflow:hidden;line-height:1;}
+    .profile-photo--lg{width:130px;height:130px;font-size:2rem;}
+    .profile-photo img{width:100%;height:100%;object-fit:cover;}
+    .profile-info h3{font-size:1.7rem;color:var(--text);margin-bottom:0.25rem;line-height:1.2;}
+    .profile-info .title{font-size:1.0625rem;font-weight:200;color:var(--text-muted);letter-spacing:0.04em;font-style:italic;margin:0 0 0.4rem 0;margin-bottom:0.6rem;line-height:1.5;}
+    .profile-info .inst{font-size:1rem;color:var(--text-muted);margin-bottom:0.6rem;line-height:1.4;}
+    .profile-info>:last-child{margin-bottom:0;}
+    .area-tags{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-bottom:0.75rem;}
+    .area-tags .area-tag{margin-bottom:0;}
+    .area-tag{display:inline-block;font-size:1rem;color:#4fc3f7;background:rgba(79,195,247,0.1);border:1px solid rgba(79,195,247,0.25);border-radius:4px;padding:0.2rem 0.65rem;margin-bottom:0.75rem;}
+    .contact-line{font-size:0.95rem;color:var(--text-muted);}
+    .contact-line a{color:var(--accent);text-decoration:none;}
+    .gold-badge{display:inline;font-size:0.72rem;color:var(--gold);font-weight:500;margin-left:0.4rem;vertical-align:0.12em;}
+
+    /* People grid */
+    .people-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
+
+    /* Placeholder rows */
+    .profile-card.profile-card--placeholder:hover{border-color:var(--border);}
+    .profile-card.profile-card--placeholder .profile-photo{border-color:var(--text-muted);color:var(--text-muted);}
+    .profile-card.profile-card--placeholder .profile-info h3{color:var(--text-muted);}
+    .profile-card.profile-card--placeholder{opacity:0.65;pointer-events:none;}
+    .profile-card.profile-card--placeholder .area-tag{color:var(--text-muted);border-color:rgba(255,255,255,0.1);background:transparent;}
+
+    footer{background:#020609;border-top:1px solid var(--border);padding:2rem 2.5rem;text-align:center;font-size:0.92rem;color:var(--text-muted);letter-spacing:0.06em;}
+    footer a{color:var(--accent);text-decoration:none;}
+    .fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+    @media(max-width:768px){.people-grid{grid-template-columns:1fr;}.profile-card{grid-template-columns:1fr;justify-items:center;text-align:center;padding:2rem 1.75rem;gap:1.5rem;}.profile-info{width:100%;}.profile-info .area-tag{text-align:center;}.profile-info .area-tags{justify-content:center;}.nav-links a{padding:0.4rem 0.5rem;font-size:0.75rem;}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo"><img src="images/logo.png" alt="Missouri S&T QuAIL" width="120" height="120" /></div>
+    <span class="nav-brand-text">Missouri S&T <span style="color:var(--accent);">QuAIL</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">About</a></li>
+    <li><a href="people.html" class="active">People</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="outreach.html">Outreach</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+    <li><a href="qstorm.html">Q-Storm</a></li>
+  </ul>
+</nav>
+
+<div class="page-content">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;width:100%;height:280px;">
+    <div style="position:relative;overflow:hidden;background:#000;">
+      <div style="position:absolute;top:0;right:0;width:130px;height:28px;background:#000;z-index:5;"></div>
+      <img src="video1.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+    </div>
+    <div style="overflow:hidden;background:#000;">
+      <img src="video2.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+    </div>
+    <div style="position:relative;overflow:hidden;background:#000;">
+      <div style="position:absolute;top:0;right:0;width:130px;height:28px;background:#000;z-index:5;"></div>
+      <img src="video3.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+    </div>
+  </div>
+  <div style="height:5px;background:linear-gradient(90deg,#7b2fff,#00b4ff,#00ffc3);"></div>
+  <div class="page-hero">
+    <img src="images/logo.png" alt="Missouri S&T QuAIL" width="100" height="100" style="margin-right: 2rem; border-radius: 16px; border: 1px solid var(--border);" />
+    <h1>People</h1>
+  </div>
+
+  <div class="section">
+    <div class="container">
+
+      <!-- Lab Director -->
+      <p class="section-label">Lab Director</p>
+      <div class="profile-card profile-card--director fade-up">
+        <div class="profile-photo profile-photo--lg"><img src="profile-pictures/grace-yan.jpg" alt="Grace Yan"></div>
+        <div class="profile-info">
+          <h3>Grace Yan</h3>
+          <p class="title">Professor, Ph.D.</p>
+          <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+          <div class="area-tags">
+            <div class="area-tag">CFD Simulation</div>
+            <div class="area-tag">Quantum Computing</div>
+          </div>
+          <p class="contact-line">(573) 341-6280 &nbsp;|&nbsp; <a href="mailto:yang@mst.edu">yang@mst.edu</a></p>
+        </div>
+      </div>
+
+      <!-- Physics -->
+      <h2 class="group-title fade-up">Physics</h2>
+      <div class="people-grid fade-up">
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://sites.mst.edu/fischerd/files/2023/09/20230916_142651-1.jpg" alt="Daniel Fischer"></div>
+          <div class="profile-info">
+            <h3>Daniel Fischer</h3>
+            <p class="title">Associate Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Atomic, Molecular, and Optical Physics</div>
+              <div class="area-tag">Laser-cooling and trapping</div>
+              <div class="area-tag">Few-particle quantum dynamics</div>
+            </div>
+            <p class="contact-line">(573) 341-4781 &nbsp;|&nbsp; <a href="mailto:fischerda@mst.edu">fischerda@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://sites.mst.edu/hodovanets/files/2026/08/IMG_0179-1-828x1024.jpg" alt="Halyna Hodovanets"></div>
+          <div class="profile-info">
+            <h3>Halyna Hodovanets</h3>
+            <p class="title">Assistant Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Discovery &amp; synthesis of quantum materials</div>
+              <div class="area-tag">Weyl semimetals &amp; superconductors</div>
+              <div class="area-tag">Condensed matter physics</div>
+            </div>
+            <p class="contact-line">(573) 341-4781 &nbsp;|&nbsp; <a href="mailto:halyna.hodovanets@mst.edu">halyna.hodovanets@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://sites.mst.edu/hkim/files/2023/09/Hyunsoo-Kim-684x1024.jpeg" alt="Hyunsoo Kim"></div>
+          <div class="profile-info">
+            <h3>Hyunsoo Kim</h3>
+            <p class="title">Assistant Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Quantum materials</div>
+              <div class="area-tag">Topological phases</div>
+              <div class="area-tag">Superconductivity</div>
+            </div>
+            <p class="contact-line">(573) 341-4781 &nbsp;|&nbsp; <a href="mailto:hyunsoo.kim@mst.edu">hyunsoo.kim@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://sites.mst.edu/mistakidis/files/2025/07/Mistakidisphoto-1024x958.jpg" alt="Simeon Mistakidis"></div>
+          <div class="profile-info">
+            <h3>Simeon Mistakidis</h3>
+            <p class="title">Assistant Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Dynamics of quantum many-body systems</div>
+              <div class="area-tag">Quantum simulation</div>
+            </div>
+            <p class="contact-line">(573) 341-4781 &nbsp;|&nbsp; <a href="mailto:smystakidis@mst.edu">smystakidis@mst.edu</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Computer Science -->
+      <h2 class="group-title fade-up">Computer Science</h2>
+      <div class="people-grid fade-up">
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://cii.mst.edu/media/center/cii/images/people/Madria 300.jpg" alt="Sanjay Madria"></div>
+          <div class="profile-info">
+            <h3>Sanjay Madria</h3>
+            <p class="title">Curators' Distinguished Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Cloud Computing</div>
+              <div class="area-tag">Wireless &amp; Mobile Data Management</div>
+              <div class="area-tag">Cyber Security</div>
+            </div>
+            <p class="contact-line">(573) 341-4856 &nbsp;|&nbsp; <a href="mailto:madrias@mst.edu">madrias@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://ece.mst.edu/media/academic/ece/images/facultydirectory/facultyprofilepages/scaled300x400/Don-Wunsch-rect.jpg" alt="Donald Wunsch"></div>
+          <div class="profile-info">
+            <h3>Donald Wunsch</h3>
+            <p class="title">Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Neural Networks</div>
+              <div class="area-tag">Reinforcement Learning</div>
+              <div class="area-tag">Explainable AI</div>
+            </div>
+            <p class="contact-line">(573) 341-4950 &nbsp;|&nbsp; <a href="mailto:dwunsch@mst.edu">dwunsch@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://isc.mst.edu/media/research/isc/researchinvestigators/outdatedimages/investigators/updatedpicturesspring2018/das_sajal_headshot_2_OGxPt.jpg" alt="Sajal Das"></div>
+          <div class="profile-info">
+            <h3>Sajal Das</h3>
+            <p class="title">Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Cyber-Physical Systems</div>
+              <div class="area-tag">IoT &amp; Wireless Sensor Networks</div>
+              <div class="area-tag">Big Data Analytics</div>
+            </div>
+            <p class="contact-line">(573) 341-7708 &nbsp;|&nbsp; <a href="mailto:sdas@mst.edu">sdas@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://isc.mst.edu/media/research/isc/researchinvestigators/2024profilepictures/nadendla_Venkata Sriram Siddh.jpg" alt="Venkata Sriram Siddhardh Nadendla"></div>
+          <div class="profile-info">
+            <h3>Venkata Sriram Siddhardh Nadendla</h3>
+            <p class="title">Associate Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Cyber-Physical-Human Systems</div>
+              <div class="area-tag">Statistical Inference &amp; Machine Learning</div>
+              <div class="area-tag">Fairness &amp; Trust</div>
+            </div>
+            <p class="contact-line">(573) 341-4090 &nbsp;|&nbsp; <a href="mailto:nadendla@mst.edu">nadendla@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://sites.mst.edu/puri/files/2023/11/cropped-1024x683.jpg" alt="Satish Puri"></div>
+          <div class="profile-info">
+            <h3>Satish Puri</h3>
+            <p class="title">Associate Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Parallel &amp; Distributed Computing</div>
+              <div class="area-tag">High Performance Computing</div>
+              <div class="area-tag">GPU Computing</div>
+            </div>
+            <p class="contact-line">(573) 341-4792 &nbsp;|&nbsp; <a href="mailto:satish.puri@mst.edu">satish.puri@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://sites.mst.edu/marifuzzaman/files/2024/10/20241001-Arif-Zaman-1024x683.jpg" alt="Md Arifuzzaman"></div>
+          <div class="profile-info">
+            <h3>Md Arifuzzaman</h3>
+            <p class="title">Assistant Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">High-Performance Networks</div>
+              <div class="area-tag">Distributed Systems</div>
+              <div class="area-tag">Systems Software</div>
+            </div>
+            <p class="contact-line">(573) 341-4520 &nbsp;|&nbsp; <a href="mailto:marifuzzaman@mst.edu">marifuzzaman@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="profile-pictures/xiaowei-yu.jpg" alt="Xiaowei Yu"></div>
+          <div class="profile-info">
+            <h3>Xiaowei Yu</h3>
+            <p class="title">Assistant Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Brain-inspired AI</div>
+              <div class="area-tag">LLMs</div>
+              <div class="area-tag">Medical AI</div>
+            </div>
+            <p class="contact-line">(573) 341-6807 &nbsp;|&nbsp; <a href="mailto:xych8@mst.edu">xych8@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://isc.mst.edu/media/research/isc/images/2025images/Ce Zhou.jpg" alt="Ce Zhou"></div>
+          <div class="profile-info">
+            <h3>Ce Zhou</h3>
+            <p class="title">Assistant Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Autonomous Driving Security</div>
+              <div class="area-tag">AI Security</div>
+              <div class="area-tag">CPS Security</div>
+            </div>
+            <p class="contact-line">(573) 341-4448 &nbsp;|&nbsp; <a href="mailto:cezhou@mst.edu">cezhou@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://cii.mst.edu/media/center/cii/images/Huiyuan Yang.jpeg" alt="Huiyuan Yang"></div>
+          <div class="profile-info">
+            <h3>Huiyuan Yang</h3>
+            <p class="title">Assistant Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Human-Centric AI</div>
+              <div class="area-tag">Multimodal Machine Learning</div>
+              <div class="area-tag">Machine Learning in Healthcare</div>
+            </div>
+            <p class="contact-line">(573) 341-4541 &nbsp;|&nbsp; <a href="mailto:hyang@mst.edu">hyang@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://sites.mst.edu/schatterjee/files/2025/04/my_pic-1-1-1024x683.jpg" alt="Shubham Chatterjee"></div>
+          <div class="profile-info">
+            <h3>Shubham Chatterjee</h3>
+            <p class="title">Assistant Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Neural Information Retrieval</div>
+              <div class="area-tag">Conversational AI &amp; RAG</div>
+              <div class="area-tag">Knowledge Graphs</div>
+            </div>
+            <p class="contact-line">(573) 341-4128 &nbsp;|&nbsp; <a href="mailto:shubham.chatterjee@mst.edu">shubham.chatterjee@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://isc.mst.edu/media/research/isc/researchinvestigators/2025profilepictures/20241001 Mia Mohammad Imran.jpg" alt="Mia Mohammad Imran"></div>
+          <div class="profile-info">
+            <h3>Mia Mohammad Imran</h3>
+            <p class="title">Assistant Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Software Engineering</div>
+              <div class="area-tag">Empirical Studies</div>
+              <div class="area-tag">Machine Learning &amp; NLP for SE</div>
+            </div>
+            <p class="contact-line">(573) 341-4128 &nbsp;|&nbsp; <a href="mailto:imranm@mst.edu">imranm@mst.edu</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mathematics -->
+      <h2 class="group-title fade-up">Mathematics</h2>
+      <div class="people-grid fade-up">
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="profile-pictures/jeffrey-humpherys.jpg" alt="Jeffrey Humpherys"></div>
+          <div class="profile-info">
+            <h3>Jeffrey Humpherys</h3>
+            <p class="title">Kummer Endowed Professor of Data Science</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Data Science</div>
+              <div class="area-tag">Applied Mathematics</div>
+            </div>
+            <p class="contact-line">(573) 341-4641 &nbsp;|&nbsp; <a href="mailto:jhumpherys@mst.edu">jhumpherys@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://sites.mst.edu/zhangyanzhi/files/2024/05/thumbnail_YanzhiZhang.jpg" alt="Yanzhi Zhang"></div>
+          <div class="profile-info">
+            <h3>Yanzhi Zhang</h3>
+            <p class="title">Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Fractional PDEs &amp; Nonlocal Models</div>
+              <div class="area-tag">Bose-Einstein Superfluids</div>
+              <div class="area-tag">Superconductivity</div>
+            </div>
+            <p class="contact-line">(573) 341-4651 &nbsp;|&nbsp; <a href="mailto:zhangyanz@mst.edu">zhangyanz@mst.edu</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Electrical and Computer Engineering -->
+      <h2 class="group-title fade-up">Electrical and Computer Engineering</h2>
+      <div class="people-grid fade-up">
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://ece.mst.edu/media/academic/ece/images/facultydirectory/facultyprofilepages/scaled300x400/lijun-jiang-rect.jpg" alt="Lijun Jiang"></div>
+          <div class="profile-info">
+            <h3>Lijun Jiang</h3>
+            <p class="title">Kummer Endowed Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Electromagnetics &amp; EMC</div>
+              <div class="area-tag">Signal &amp; Power Integrity</div>
+              <div class="area-tag">Microwave Engineering</div>
+            </div>
+            <p class="contact-line">(573) 341-4844 &nbsp;|&nbsp; <a href="mailto:ljf82@mst.edu">ljf82@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://ece.mst.edu/media/academic/ece/images/facultydirectory/facultyprofilepages/scaled300x400/20250903 Feng Zhao mIni.jpg" alt="Feng Zhao"></div>
+          <div class="profile-info">
+            <h3>Feng Zhao</h3>
+            <p class="title">Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Microelectronics &amp; Nanoelectronics</div>
+              <div class="area-tag">MEMS/NEMS</div>
+              <div class="area-tag">Semiconductor Devices</div>
+            </div>
+            <p class="contact-line">(573) 341-4262 &nbsp;|&nbsp; <a href="mailto:fengzhao@mst.edu">fengzhao@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://ece.mst.edu/media/academic/ece/images/facultydirectory/facultyprofilepages/scaled300x400/mina-esmaeelpour-rect.jpg" alt="Mina Esmaeelpour"></div>
+          <div class="profile-info">
+            <h3>Mina Esmaeelpour</h3>
+            <p class="title">Assistant Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Fiber Optic Sensors</div>
+              <div class="area-tag">Microwave Photonics</div>
+              <div class="area-tag">Ultrafast Imaging &amp; Spectroscopy</div>
+            </div>
+            <p class="contact-line">(573) 341-4407 &nbsp;|&nbsp; <a href="mailto:mina.esmaeelpour@mst.edu">mina.esmaeelpour@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://ece.mst.edu/media/academic/ece/images/facultydirectory/facultyprofilepages/archive/Mumtaz, Farhan.png" alt="Farhan Mumtaz"></div>
+          <div class="profile-info">
+            <h3>Farhan Mumtaz</h3>
+            <p class="title">Assistant Research Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Fiber Optic Sensors</div>
+              <div class="area-tag">Micro/Nano Materials &amp; Devices</div>
+              <div class="area-tag">Harsh-Environment Sensing</div>
+            </div>
+            <p class="contact-line">(573) 647-3681 &nbsp;|&nbsp; <a href="mailto:mfmawan@mst.edu">mfmawan@mst.edu</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mechanical & Aerospace Engineering -->
+      <h2 class="group-title fade-up">Mechanical &amp; Aerospace Engineering</h2>
+      <div class="people-grid fade-up">
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://sites.mst.edu/jonghyunpark/files/2023/08/Park-Picture-edited.jpg" alt="Jonghyun Park"></div>
+          <div class="profile-info">
+            <h3>Jonghyun Park</h3>
+            <p class="title">Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Advanced Li-ion &amp; Beyond Li-ion Batteries</div>
+              <div class="area-tag">Energy Storage Systems</div>
+              <div class="area-tag">Multiscale/Multiphysics Modeling</div>
+            </div>
+            <p class="contact-line">(573) 341-4610 &nbsp;|&nbsp; <a href="mailto:parkjonghy@mst.edu">parkjonghy@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://sites.mst.edu/daoruhan/files/2023/08/han_daoru_WPI-edited.jpg" alt="Frank Han"></div>
+          <div class="profile-info">
+            <h3>Frank Han</h3>
+            <p class="title">Associate Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Plasma Aerospace Applications</div>
+              <div class="area-tag">Space Propulsion</div>
+              <div class="area-tag">High-Performance Computing</div>
+            </div>
+            <p class="contact-line">(573) 341-4337 &nbsp;|&nbsp; <a href="mailto:handao@mst.edu">handao@mst.edu</a></p>
+          </div>
+        </div>
+        <div class="profile-card fade-up">
+          <div class="profile-photo"><img src="https://sites.mst.edu/zhiliang/files/2023/08/zhil-edited.jpg" alt="Zhi Liang"></div>
+          <div class="profile-info">
+            <h3>Zhi Liang</h3>
+            <p class="title">Associate Professor</p>
+            <p class="inst">Missouri University of Science and Technology (Missouri S&T)</p>
+            <div class="area-tags">
+              <div class="area-tag">Micro/Nanoscale Thermodynamics &amp; Heat Transfer</div>
+              <div class="area-tag">Nanodroplet &amp; Nanobubble Dynamics</div>
+              <div class="area-tag">Computational Modeling</div>
+            </div>
+            <p class="contact-line">(573) 341-4982 &nbsp;|&nbsp; <a href="mailto:zlch5@mst.edu">zlch5@mst.edu</a></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>&copy; 2026 Center for Quantum AI Leap (Missouri S&T QuAIL) &nbsp;·&nbsp; <a href="mailto:yang@mst.edu">yang@mst.edu</a> &nbsp;·&nbsp; Rolla, MO, USA</footer>
+<script>
+  document.querySelectorAll('.fade-up').forEach(el => {
+    new IntersectionObserver(([e]) => { if(e.isIntersecting) el.classList.add('visible'); },{threshold:0.1}).observe(el);
+  });
+</script>
+</body>
+</html>
