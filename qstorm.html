@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q-Storm Workshop – Missouri S&T QuAIL</title>
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#050a14;--bg2:#080e1c;--surface:#0c1526;--surface2:#111d30;--border:rgba(0,180,255,0.12);--accent:#00b4ff;--accent2:#7b2fff;--accent3:#00ffc3;--text:#f1f4fa;--text-muted:#f1f4fa;}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Google Sans Flex', sans-serif; font-weight: 200; font-size: 1.25rem; line-height: 1.7; overflow-x: hidden; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Google Sans Flex', sans-serif; font-weight: 500; }
+    b, strong { font-weight: 500; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(5,10,20,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 64px; }
+    .nav-brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .nav-logo { flex-shrink: 0; height: 40px; display: flex; align-items: center; justify-content: center; }
+    .nav-logo img { height: 100%; width: auto; max-width: 120px; display: block; object-fit: contain; }
+    .nav-brand-text { font-family: 'Google Sans Flex', sans-serif; font-weight: 500; font-size: 1.1rem; color: var(--text); letter-spacing: 0.04em; }
+    .nav-brand-text span { color: var(--accent); }
+    .nav-links { display: flex; gap: 0.15rem; list-style: none; }
+    .nav-links a { display: block; padding: 0.4rem 0.85rem; font-family: 'Google Sans Flex', sans-serif; font-weight: 500; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--accent); background: rgba(0,180,255,0.08); }
+    .nav-links a.active { color: var(--accent); background: rgba(0,180,255,0.1); border-bottom: 2px solid var(--accent); }
+
+    /* PAGE CONTENT */
+    .page-content { padding-top: 64px; }
+    .section { padding: 5rem 0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; display: flex; flex-direction: column; align-items: stretch; }
+    .section-label { font-family: 'Google Sans Flex', sans-serif; font-weight: 500; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    h2.section-title { font-size: 2.2rem; letter-spacing: 0.04em; color: var(--text); margin-bottom: 2.5rem; position: relative; display: inline-block; align-self: center; text-align: center; }
+    h2.section-title::after { content: ''; position: absolute; left: 50%; bottom: -8px; width: 140px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; transform: translateX(-50%); }
+
+    /* STORM HERO */
+    .storm-hero { position: relative; background: var(--bg2); padding: 5rem 2.5rem 4rem; text-align: center; overflow: hidden; }
+    .storm-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 10%, rgba(123,47,255,0.16) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 55% at 85% 0%, rgba(0,180,255,0.14) 0%, transparent 65%),
+        radial-gradient(ellipse 90% 60% at 50% 100%, rgba(0,255,195,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .storm-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,180,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,180,255,0.05) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black 20%, transparent 75%);
+      pointer-events: none;
+    }
+    .storm-badge { position: relative; z-index: 2; width: 92px; height: 92px; margin: 0 auto 1.75rem; border-radius: 20px; background: radial-gradient(circle at 50% 40%, rgba(0,180,255,0.25), rgba(5,10,20,0.4)); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 60px rgba(0,180,255,0.25); }
+    .storm-badge img { width: 56px; height: 56px; object-fit: contain; image-rendering: -webkit-optimize-contrast; filter: drop-shadow(0 0 14px rgba(0,180,255,0.65)); }
+    .storm-eyebrow { position: relative; z-index: 2; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent3); margin-bottom: 1.1rem; }
+    h1.storm-title { position: relative; z-index: 2; font-size: clamp(1.9rem, 4.4vw, 3.1rem); letter-spacing: 0.02em; line-height: 1.18; color: var(--text); max-width: 900px; margin: 0 auto; }
+    h1.storm-title .q-letter { color: var(--accent); }
+    p.storm-subtitle { position: relative; z-index: 2; font-size: clamp(1.05rem, 1.6vw, 1.3rem); color: var(--text-muted); opacity: 0.85; max-width: 760px; margin: 1.25rem auto 0; font-weight: 300; }
+    .storm-tags { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin-top: 2.1rem; }
+    .storm-tag { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: rgba(0,180,255,0.08); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 999px; }
+    .hero-divider { height: 5px; background: linear-gradient(90deg, var(--accent2), var(--accent), var(--accent3)); position: relative; z-index: 2; }
+
+    /* OVERVIEW */
+    .about-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: start; }
+    .about-text p { margin-bottom: 1.2rem; color: var(--text); font-size: 1.35rem; }
+    .about-text strong { color: var(--accent); font-weight: 500; }
+    .vision-mission { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; }
+    .vision-block { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+    .vision-block:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .vision-block h3 { font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .vision-block p { font-size: 1.1875rem; color: var(--text-muted); }
+    .vision-block .tbd { color: var(--accent3); font-style: italic; opacity: 0.85; }
+
+    /* OBJECTIVES */
+    .objectives-heading { font-family: 'Google Sans Flex', sans-serif; font-weight: 500; font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    .not-goal { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent2); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; font-size: 1.15rem; color: var(--text-muted); }
+    .not-goal strong { color: var(--accent3); font-weight: 500; }
+    .mission-list { margin: 0.75rem 0 0 0; padding-left: 1.35rem; list-style-position: outside; }
+    .mission-list li { margin-bottom: 0.9rem; font-size: 1.1875rem; color: var(--text-muted); padding-left: 0.25rem; }
+    .mission-list li::marker { font-family: 'Google Sans Flex', sans-serif; font-weight: 500; color: var(--accent); }
+    .mission-list li::first-letter { color: var(--accent); font-weight: 600; font-size: 1.15em; }
+
+    /* IMPACT CALLOUT */
+    .impact-callout { background: linear-gradient(135deg, rgba(0,180,255,0.07), rgba(123,47,255,0.07)); border: 1px solid var(--border); border-radius: 12px; padding: 2.25rem 2.5rem; margin-top: 1rem; }
+    .impact-callout p { font-size: 1.3rem; color: var(--text); }
+    .impact-callout strong { color: var(--accent3); font-weight: 500; }
+
+    /* FOOTER */
+    footer { background: #020609; border-top: 1px solid var(--border); padding: 2rem 2.5rem; text-align: center; font-size: 1rem; color: var(--text-muted); letter-spacing: 0.06em; }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* FADE */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .nav-links a { padding: 0.4rem 0.5rem; font-size: 0.75rem; }
+      .storm-hero { padding: 3.5rem 1.5rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo"><img src="images/logo.png" alt="Missouri S&T QuAIL" width="120" height="120" /></div>
+    <span class="nav-brand-text">Missouri S&T <span style="color:var(--accent);">QuAIL</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">About</a></li>
+    <li><a href="people.html">People</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="outreach.html">Outreach</a></li>
+    <li><a href="qstorm.html" class="active">Q-Storm</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+  </ul>
+</nav>
+
+<div class="page-content">
+  <!-- STORM HERO -->
+  <div class="storm-hero">
+    <div class="storm-badge"><img src="images/qstorm-logo.png" alt="Q-Storm" /></div>
+    <div class="storm-eyebrow">NSF-Funded Workshop &nbsp;·&nbsp; Spring 2027</div>
+    <h1 class="storm-title"><span class="q-letter">Q</span>uantum Catalyst through Severe Convective Storm Testbeds (<span class="q-letter">Q</span>-Storm)</h1>
+    <p class="storm-subtitle">Quantum Computing and Sensing for Next-Generation Severe Weather Prediction</p>
+    <div class="storm-tags">
+      <span class="storm-tag">Atmospheric Science</span>
+      <span class="storm-tag">Quantum Information Science</span>
+      <span class="storm-tag">AI / ML</span>
+      <span class="storm-tag">Applied Mathematics</span>
+      <span class="storm-tag">Computational Science</span>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+
+  <!-- OVERVIEW -->
+  <div class="section">
+    <div class="container">
+      <div class="section-label" style="align-self:center;">Workshop Overview</div>
+      <h2 class="section-title" style="color:var(--accent);">About <span style="color:var(--accent);">Q-Storm</span></h2>
+      <div class="about-grid fade-up">
+        <div class="about-text">
+          <p>The <strong>Q-Storm</strong> workshop brings together researchers to chart a realistic, evidence-based path for applying quantum computing and quantum sensing to the prediction of severe convective storms (SCS) — one of the most computationally demanding challenges in the geosciences.</p>
+          <p>Rather than assuming quantum advantage for operational SCS forecasting, Q-Storm sets out to build the scientific roadmap that determines where such advantage might realistically emerge, and what it will take to get there.</p>
+          <p>By treating SCS hazard prediction as a computationally demanding but tractable benchmark problem, the workshop aims to catalyze interdisciplinary collaboration across atmospheric science, quantum information science, AI/ML, applied mathematics, and computational science — work that can extend, in time, to the broader geosciences and beyond.</p>
+        </div>
+        <div class="vision-mission">
+          <div class="vision-block">
+            <h3>Funding</h3>
+            <p>Supported by the National Science Foundation (NSF).</p>
+          </div>
+          <div class="vision-block">
+            <h3>When</h3>
+            <p>Spring 2027 <span class="tbd">— exact dates to be announced</span></p>
+          </div>
+          <div class="vision-block">
+            <h3>Details</h3>
+            <p class="tbd">More information will be posted as it becomes available.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <div class="section" style="background: var(--bg2);">
+    <div class="container">
+      <div class="section-label" style="align-self:center;">Goals</div>
+      <h2 class="section-title" style="color:var(--accent);">Workshop Objectives</h2>
+      <div class="about-grid fade-up" style="grid-template-columns:1fr; gap:1rem;">
+        <div class="not-goal">
+          The objective of this workshop is <strong>not</strong> to assume quantum advantage for operational SCS forecasting, but rather to establish a realistic scientific roadmap.
+        </div>
+        <div>
+          <p class="objectives-heading">That roadmap will:</p>
+          <ol class="mission-list">
+            <li>Systematically identify where in the traditional SCS modeling workflow quantum approaches may offer advantage;</li>
+            <li>Establish hybrid HPC–Quantum–AI workflows;</li>
+            <li>Evaluate use-case priorities across near-, middle-, and long-term horizons; and</li>
+            <li>Develop benchmark problems related to SCS modeling.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="impact-callout fade-up">
+        <p>Q-Storm seeks to catalyze and illuminate interdisciplinary collaboration spanning <strong>atmospheric science, quantum information science, AI/ML, applied mathematics, and computational science</strong> — a foundation that can expand with confidence to the entire geosciences and other science and engineering fields in the future.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>&copy; 2026 Center for Quantum AI Leap (Missouri S&T QuAIL) &nbsp;·&nbsp; <a href="mailto:yang@mst.edu">yang@mst.edu</a> &nbsp;·&nbsp; Rolla, MO, USA</footer>
+<script>
+  document.querySelectorAll('.fade-up').forEach(el => {
+    new IntersectionObserver(([e]) => { if(e.isIntersecting){ el.classList.add('visible'); } }, {threshold:0.1}).observe(el);
+  });
+</script>
+</body>
+</html>
